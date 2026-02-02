@@ -3,5 +3,5 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Account(models.Model):
-    username = models.TextField(User, on_delete=models.CASCADE)
-    password = models.TextField(User)
+    username = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
