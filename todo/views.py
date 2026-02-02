@@ -14,3 +14,8 @@ def registerPageView(request):
         return redirect("index")
     return render(request, "register.html")
 
+def loginPageView(request):
+    if request.method == "POST":
+        pass # Add login functionality later!!!
+    return render(request, "login.html")
+
