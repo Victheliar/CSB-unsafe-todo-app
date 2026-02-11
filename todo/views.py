@@ -8,14 +8,21 @@ def homePageView(request):
 def registerPageView(request):
     if request.method == "POST":
         username = request.POST.get("username")
-        password = request.POST.get("password1")
-        account = Account(username=username, password=password)
-        account.save()
-        return redirect("index")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+        if password1 == password2:
+            account = Account(username=username, password=password1)
+            account.save()
+            return redirect("index")
     return render(request, "register.html")
 
 def loginPageView(request):
     if request.method == "POST":
-        pass # Add login functionality later!!!
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        exists = Account.objects.filter(username=username, password=password)
+        if exists:
+            print("Logged in as",username)
+            return redirect("index")
     return render(request, "login.html")
 
