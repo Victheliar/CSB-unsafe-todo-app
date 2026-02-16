@@ -22,7 +22,6 @@ def loginPageView(request):
         password = request.POST.get("password")
         exists = Account.objects.filter(username=username, password=password)
         if exists:
-            print("Logged in as",username)
-            return redirect("index")
+            return render(request, "index.html", {"signed_in":True, "username":username})
     return render(request, "login.html")
 

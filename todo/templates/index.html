@@ -2,4 +2,7 @@
 {% block title %}Homepage{% endblock %}
 {% block content %}
 <p>Welcome to your Todo-App!</p>
+{% if signed_in %}
+    <p>signed in as {{ username }}</p>
+{% endif %}
 {% endblock %}
