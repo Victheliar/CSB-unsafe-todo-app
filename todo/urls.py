@@ -5,4 +5,5 @@ urlpatterns = [
     path("", views.homePageView, name="index"),
     path("register/", views.registerPageView),
     path("login/", views.loginPageView),
+    path("add_todo/", views.homePageView),
 ]

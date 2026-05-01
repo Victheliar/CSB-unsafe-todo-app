@@ -1,8 +1,13 @@
-from django.shortcuts import render, redirect
-from .models import Account
+from django.shortcuts import render, redirect, session
+from .models import Account, Todo
 
 # Create your views here.
 def homePageView(request):
+    if request.method == "POST":
+        todo = request.POST.get("todo")
+        todo = Todo(content=todo, owner=Account.objects.filter(username=request.user.username).first())
+        print(todo.owner)
+        todo.save()
     return render(request, "index.html")
 
 def registerPageView(request):

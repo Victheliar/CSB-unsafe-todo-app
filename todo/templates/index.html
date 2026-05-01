@@ -3,6 +3,15 @@
 {% block content %}
 <p>Welcome to your Todo-App!</p>
 {% if signed_in %}
-    <p>signed in as {{ username }}</p>
+    <p>Welcome {{ username }}!! ✨❤️</p>
+
+    <h2>My Todos</h2>
+    <form action = "/add_todo/" method = "post">
+        {% csrf_token %}
+        <p>
+            <input type = "text" name = "todo" id = "todo" />
+            <input type = "submit" value = "Add Todo" />
+        </p>
+    </form>
 {% endif %}
 {% endblock %}
