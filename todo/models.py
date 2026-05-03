@@ -7,6 +7,6 @@ class Account(models.Model):
     password = models.CharField(max_length=30)
 
 class Todo(models.Model):
-    owner = models.ForeignKey(Account, on_delete=models.CASCADE)
+    owner = models.CharField(max_length=30)
     content = models.CharField(max_length=255)
     done = models.BooleanField(default=False)
