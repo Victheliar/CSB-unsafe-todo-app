@@ -3,12 +3,17 @@ from .models import Account, Todo
 
 # Create your views here.
 def homePageView(request):
+
     if request.method == "POST":
         todo = request.POST.get("todo")
         todo = Todo(content=todo, owner=request.session.get("username"))
         print(todo.owner)
         todo.save()
-    return render(request, "index.html")
+        return redirect("index")
+
+    todos = Todo.objects.filter(owner=request.session.get("username"))
+
+    return render(request, "index.html", {"todos":todos, "signed_in":request.session.get("signed_in"), "username":request.session.get("username")})
 
 def registerPageView(request):
     if request.method == "POST":
@@ -29,6 +34,7 @@ def loginPageView(request):
         if exists:
             # store username in session so new todos have an owner
             request.session["username"] = username
-            return render(request, "index.html", {"signed_in":True, "username":username})
+            request.session["signed_in"] = True
+            return redirect("index")
     return render(request, "login.html")
 
