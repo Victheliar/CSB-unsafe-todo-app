@@ -5,10 +5,14 @@ from .models import Account, Todo
 def homePageView(request):
 
     if request.method == "POST":
-        todo = request.POST.get("todo")
-        todo = Todo(content=todo, owner=request.session.get("username"))
-        print(todo.owner)
-        todo.save()
+        if "Delete" in request.POST:
+            todo_id = request.POST.get("todo_id")
+            Todo.objects.filter(id=todo_id, owner=request.session.get("username")).delete()
+        else:
+            todo = request.POST.get("todo")
+            todo = Todo(content=todo, owner=request.session.get("username"))
+            print(todo.owner)
+            todo.save()
         return redirect("index")
 
     todos = Todo.objects.filter(owner=request.session.get("username"))

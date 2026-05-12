@@ -14,7 +14,11 @@
         </p>
     </form>
     {% for todo in todos %}
-        <input type = "checkbox" id = "{{ todo }}" name = "{{ todo }}" value = "{{ todo}}" > {{ todo.content }} <br />
+        <form action = "/delete_todo/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="todo_id" value="{{ todo.id }}" />
+            <input type="checkbox" id="todo-{{ todo.id }}" /> {{ todo.content }} <input type="submit" name="Delete" value="Delete"/><br />
+        </form>
     {% endfor %}
 {% endif %}
 {% endblock %}
