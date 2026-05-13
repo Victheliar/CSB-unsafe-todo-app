@@ -42,3 +42,8 @@ def loginPageView(request):
             return redirect("index")
     return render(request, "login.html")
 
+def logoutPageView(request):
+    if "signed_in" in request.session:
+        request.session["signed_in"] = False
+        del request.session["username"]
+    return redirect("index")
