@@ -16,6 +16,13 @@
             <a href="/login">Login</a>
             {% endif %}
         </p>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="error">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
         {% block content %}{% endblock %}
     </body>
 </html>

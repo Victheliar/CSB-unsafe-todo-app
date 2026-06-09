@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Account, Todo
 
 # Create your views here.
@@ -22,12 +23,18 @@ def homePageView(request):
 def registerPageView(request):
     if request.method == "POST":
         username = request.POST.get("username")
+        username_taken = Account.objects.filter(username=username)
+        if username_taken:
+            messages.error(request, "Username is already taken!")
+            return render(request, "register.html")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
         if password1 == password2:
             account = Account(username=username, password=password1)
             account.save()
             return redirect("index")
+        else:
+            messages.error(request, "Passwords do not match!")
     return render(request, "register.html")
 
 def loginPageView(request):
