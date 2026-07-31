@@ -41,10 +41,12 @@ def loginPageView(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-        exists = Account.objects.filter(username=username, password=password)
+        exists = Account.objects.filter(user_id=Account.objects.get(username=username).user_id, password=password).exists()
         if exists:
-            # store username in session so new todos have an owner
+            # store username and user_id in session so new todos have an owner
+            user_id = Account.objects.get(username=username).user_id
             request.session["username"] = username
+            request.session["user_id"] = user_id
             request.session["signed_in"] = True
             return redirect("index")
     return render(request, "login.html")
@@ -53,4 +55,5 @@ def logoutPageView(request):
     if "signed_in" in request.session:
         request.session["signed_in"] = False
         del request.session["username"]
+        del request.session["user_id"]
     return redirect("index")
