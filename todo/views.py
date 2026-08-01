@@ -8,15 +8,16 @@ def homePageView(request):
     if request.method == "POST":
         if "Delete" in request.POST:
             todo_id = request.POST.get("todo_id")
-            Todo.objects.filter(id=todo_id, owner=request.session.get("username")).delete()
+            Todo.objects.filter(id=todo_id, owner=request.session.get("user_id")).delete()
         else:
             todo = request.POST.get("todo")
-            todo = Todo(content=todo, owner=request.session.get("username"))
-            print(todo.owner)
+            owner = Account.objects.get(user_id=request.session.get("user_id"))
+            todo = Todo(content=todo, owner=owner)
+            # print(todo.owner)
             todo.save()
         return redirect("index")
 
-    todos = Todo.objects.filter(owner=request.session.get("username"))
+    todos = Todo.objects.filter(owner=request.session.get("user_id"))
 
     return render(request, "index.html", {"todos":todos, "signed_in":request.session.get("signed_in"), "username":request.session.get("username")})
 
