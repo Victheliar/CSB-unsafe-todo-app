@@ -3,10 +3,6 @@ from django.conf import settings
 
 
 # Create your models here.
-# class Account(models.Model):
-#     username = models.CharField(max_length=30)
-#     password = models.CharField(max_length=30)
-#     user_id = models.AutoField(primary_key=True)
 
 class Todo(models.Model):
     owner = models.ForeignKey(
