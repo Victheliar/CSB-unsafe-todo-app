@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User
 from .models import Todo
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def homePageView(request):
@@ -33,20 +33,14 @@ def homePageView(request):
 
 def registerPageView(request):
     if request.method == "POST":
-        username = request.POST.get("username", "").strip()
-        password1 = request.POST.get("password1", "")
-        password2 = request.POST.get("password2", "")
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "This username is already taken!")
-            return render(request, "register.html")
-        if password1 != password2:
-            messages.error(request, "Passwords do not match!")
-            return render(request, "register.html")
-        else:
-            user = User.objects.create_user(username=username, password=password1)
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
             login(request, user)
             return redirect("index")
-    return render(request, "register.html")
+    else:
+        form = UserCreationForm()
+    return render(request, "register.html", {"form": form})
 
 def loginPageView(request):
     if request.method == "POST":
