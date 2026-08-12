@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
+# from django.contrib import messages
 from .models import Todo, Account
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth import authenticate, login, logout
+# from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def homePageView(request):
@@ -13,7 +13,7 @@ def homePageView(request):
         else:
             todo = request.POST.get("todo")
             todo = Todo(content=todo, owner=request.session.get("username"))
-            print(todo.owner)
+            # print(todo.owner)
             todo.save()
         return redirect("index")
 
