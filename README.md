@@ -5,7 +5,10 @@ A todo-app intentionally made with cyber security flaws for Mooc's Cyber Securit
 
 1. Clone the repository onto your machine with ```git clone git@github.com:Victheliar/CSB-unsafe-todo-app.git```
 
-2. Open the project and make a ```secrets.py``` file inside the CSB_app directory. Inside of this file, add a ```SECRET_KEY``` of your choosing.
+2. Before running the app, set an environmental variable ```SECRET_KEY``` to the value of your choosing. E.g. in Powershell, this can be done as follows:
+```
+$env:SECRET_KEY="your-secret-key"
+```
 
 3. Now you can install and run the project locally using the following command:
 ```python manage.py runserver```
