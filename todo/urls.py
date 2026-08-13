@@ -8,4 +8,5 @@ urlpatterns = [
     path("add_todo/", views.homePageView),
     path("delete_todo/", views.homePageView),
     path("logout/", views.logoutPageView),
+    path("trigger_error/", views.triggerErrorView),
 ]

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 # from django.contrib import messages
 from .models import Todo, Account
+from django.http import HttpResponse
 # from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.forms import UserCreationForm
 
@@ -94,3 +95,6 @@ def logoutPageView(request):
     return redirect("index")
     # logout(request)
     # return redirect("index")
+
+def triggerErrorView(request):
+    raise RuntimeError("Error demonstration")
