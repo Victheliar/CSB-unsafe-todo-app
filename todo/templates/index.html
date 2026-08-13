@@ -7,7 +7,7 @@
 
     <h2>My Todos</h2>
     <form action = "/add_todo/" method = "post">
-        {% csrf_token %}
+        <!-- {% csrf_token %} -->
         <p>
             <input type = "text" name = "todo" id = "todo" />
             <input type = "submit" value = "Add Todo" />
@@ -15,7 +15,7 @@
     </form>
     {% for todo in todos %}
         <form action = "/delete_todo/" method="post">
-            {% csrf_token %}
+            <!-- {% csrf_token %} -->
             <input type="hidden" name="todo_id" value="{{ todo.id }}" />
             <input type="checkbox" id="todo-{{ todo.id }}" /> {{ todo.content }} <input type="submit" name="Delete" value="Delete"/><br />
         </form>

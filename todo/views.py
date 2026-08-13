@@ -10,7 +10,8 @@ def homePageView(request):
     if request.method == "POST":
         if "Delete" in request.POST:
             todo_id = request.POST.get("todo_id")
-            Todo.objects.filter(id=todo_id, owner=request.session.get("username")).delete()
+            # Todo.objects.filter(id=todo_id, owner=request.session.get("username")).delete()
+            Todo.objects.filter(id=todo_id).delete()
         else:
             todo = request.POST.get("todo")
             todo = Todo(content=todo, owner=request.session.get("username"))
